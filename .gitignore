@@ -1,0 +1,42 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Expo and React Native
+.expo/
+.expo-shared/
+.vscode/
+dist/
+build/
+*.log
+*.tmp
+*.cache
+*.env
+
+# Python virtual environment and cache
+venv/
+myenv/                      
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model and Dataset Files (Included)
+!Server/plant_disease_model_1_latest.pt
+!Server/disease_info.csv
+!Server/supplement_info.csv
+
+# IDE and Editor Settings
+*.idea/
+*.DS_Store
+*.log
+*.swp
+*.bak
+
+# Output folders
+/static/
+*.out
+*.bin
+
+# Ignore Git folders
+.git/
