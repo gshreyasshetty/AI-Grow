@@ -5,6 +5,9 @@ export default {
     name: "AI-GROW",
     slug: "ai-grow",
     version: "1.0.0",
+    android: {
+      package: "com.yourcompany.aigrow", // Replace with your actual package name
+    },
     extra: {
       googleApiKey: process.env.GOOGLE_API_KEY,
       firebaseApiKey: process.env.FIREBASE_API_KEY,
@@ -15,6 +18,9 @@ export default {
       firebaseAppId: process.env.FIREBASE_APP_ID,
       firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID,
       locationIqAccessToken: process.env.LOCATION_IQ_ACCESS_TOKEN,
+      eas: {
+        projectId: "104b3e26-684d-4f3f-b22f-e4bd0dc4582f"
+      }
     },
   },
 };
