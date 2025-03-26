@@ -6,8 +6,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { router } from "expo-router";
 import Constants from 'expo-constants';
 
-const apiKey = Constants.expoConfig.extra.googleApiKey;
-const genAI = new GoogleGenerativeAI(apiKey);
+const apiKey = Constants.expoConfig?.extra?.googleApiKey;
+const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 const generationConfig = {
   temperature: 0.7,
@@ -40,6 +40,10 @@ const CropRecommendations = () => {
     try {
       setIsLoading(true);
 
+      if (!genAI) {
+        throw new Error("Google API key is not configured");
+      }
+
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
       const chatSession = model.startChat({
         generationConfig,
@@ -70,13 +74,12 @@ const CropRecommendations = () => {
       const responseText = result.response.text();
 
       console.log("Raw AI Response:", responseText);
-
  
       const parsedResponse = extractJSON(responseText);
       setAiRecommendations(parsedResponse.recommendations || []);
     } catch (err) {
       console.error("Error fetching AI recommendations:", err);
-      setError("Failed to fetch valid recommendations. Please try again.");
+      setError(`Failed to fetch recommendations: ${err.message}`);
       setAiRecommendations([]);
     } finally {
       setIsLoading(false);

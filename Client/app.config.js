@@ -1,12 +1,11 @@
-import 'dotenv/config';
-
 export default {
   expo: {
     name: "AI-GROW",
     slug: "ai-grow",
-    version: "1.0.0",
+    version: "1.0.1", 
     android: {
-      package: "com.yourcompany.aigrow", // Replace with your actual package name
+      package: "com.shreyas.aigrow",
+      versionCode: 2 
     },
     extra: {
       googleApiKey: process.env.GOOGLE_API_KEY,

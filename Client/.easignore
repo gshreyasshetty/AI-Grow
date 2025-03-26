@@ -1,0 +1,19 @@
+# Ignore unnecessary files for the build process
+node_modules/**/*.md
+node_modules/**/*.txt
+node_modules/**/*.lock
+node_modules/**/.github/
+node_modules/**/*.log
+.git
+.vscode
+.idea
+__tests__
+**/*.test.js
+**/*.spec.js
+.gitignore
+*.log
+*.md
+README*
+LICENSE*
+CHANGELOG*
+app-example/

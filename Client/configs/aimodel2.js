@@ -1,7 +1,12 @@
 import Constants from 'expo-constants';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const apiKey = Constants.expoConfig.extra.googleApiKey;
+// Add error handling for missing API key
+const apiKey = Constants.expoConfig?.extra?.googleApiKey || '';
+if (!apiKey) {
+  console.warn("Missing Google API Key. AI features won't work properly.");
+}
+
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -16,6 +21,18 @@ const generationConfig = {
   responseMimeType: "application/json",
 };
 
-export const chatSession = model.startChat({
-  generationConfig,
-});
+// Wrap chat session in try-catch
+let chatSession;
+try {
+  chatSession = model.startChat({
+    generationConfig,
+  });
+} catch (error) {
+  console.error("Error starting AI chat session:", error);
+  // Provide a fallback
+  chatSession = {
+    sendMessage: async () => ({ response: { text: () => JSON.stringify({ error: "AI service unavailable" }) } })
+  };
+}
+
+export { chatSession };
